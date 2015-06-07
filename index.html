@@ -14,7 +14,7 @@
     <script>
       var map = L.map('map');
 
-      $.getJSON("data/neighborhoods_pdx.geojson", function(data) {
+      $.getJSON("data/neighborhoods_pdx.json", function(data) {
       var geojson = L.geoJson(data, {
         onEachFeature: function (feature, layer) {
           layer.bindPopup(feature.properties.name);
