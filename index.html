@@ -12,10 +12,7 @@
   <body>
     <div id="map"></div>
     <script>
-      function popUp(feature, layer) {
-        layer.bindPopup(feature.properties.name);
-      }
-      var nhoods = new L.GeoJSON.AJAX("data/neighborhoods_pdx.json", {onEachFeature:popUp});
+      var nhoods = new L.GeoJSON.AJAX("data/neighborhoods_pdx.json");
       var map = L.map('map');
 
       L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
