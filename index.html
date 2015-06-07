@@ -12,6 +12,9 @@
   <body>
     <div id="map"></div>
     <script>
+      function popUp(feature, layer) {
+        layer.bindPopup(feature.properties.name);
+      }
       var nhoods = new L.GeoJSON.AJAX("data/neighborhoods_pdx.json", {onEachFeature:popUp});
       var map = L.map('map');
 
