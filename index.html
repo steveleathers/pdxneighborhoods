@@ -12,7 +12,7 @@
     <div id="map"></div>
     <script>
       var map = L.map('map');
-      var geojsonLayer = new L.GeoJSON.AJAX("data/neighborhoods_pdx.geojson");
+      var geojsonLayer = new L.GeoJSON("data/neighborhoods_pdx.geojson");
 
       L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
       	maxZoom: 18,
@@ -22,7 +22,7 @@
       	id: 'examples.map-i875mjb7'
       }).addTo(map);
       L.geoJson(geojsonFeature).addTo(map);
-      
+
       function onLocationFound(e) {
       	var radius = e.accuracy / 2;
 
