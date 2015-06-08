@@ -41,7 +41,7 @@
               .on('dragend', function(e) {
                   var layer = leafletPip.pointInLayer(this.getLatLng(), nhoods, true);
                   if (layer.length) {
-                    nhood.innerHTML = '<strong>' + layer[0].feature.properties.name + '</strong>';
+                    nhood.innerHTML = '<strong>' + layer[0].feature.properties.NAME + '</strong>';
                   } else {
                     nhood.innerHTML = '';
                   }
