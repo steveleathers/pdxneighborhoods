@@ -16,7 +16,8 @@
 
       L.mapbox.accessToken = 'pk.eyJ1IjoibWlnY29tIiwiYSI6ImNrUllYc3MifQ.isgDkadcGHvdQKkSC1ohfQ';
       var nhood = document.getElementById('nhood');
-      var map = L.mapbox.map('map');
+      var map = L.mapbox.map('map')
+        .setView([45.52, -122.6819], 8);
       
       L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
       	maxZoom: 18,
@@ -46,23 +47,23 @@
               });
           }
       });
-      function onLocationFound(e) {
-      	var radius = e.accuracy / 2;
+      // function onLocationFound(e) {
+      // 	var radius = e.accuracy / 2;
 
-      	L.marker(e.latlng).addTo(map)
-      		.bindPopup("You are within " + radius + " meters from this point").openPopup();
+      // 	L.marker(e.latlng).addTo(map)
+      // 		.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-      	L.circle(e.latlng, radius).addTo(map);
-      }
+      // 	L.circle(e.latlng, radius).addTo(map);
+      // }
 
-      function onLocationError(e) {
-      	alert(e.message);
-      }
+      // function onLocationError(e) {
+      // 	alert(e.message);
+      // }
 
-      map.on('locationfound', onLocationFound);
-      map.on('locationerror', onLocationError);
+      // map.on('locationfound', onLocationFound);
+      // map.on('locationerror', onLocationError);
 
-      map.locate({setView: true, maxZoom: 16});
+      // map.locate({setView: true, maxZoom: 16});
     </script>
   </body>
 </html>
