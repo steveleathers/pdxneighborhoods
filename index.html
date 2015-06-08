@@ -4,6 +4,8 @@
     <title="What neighborhood is this?"></title>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
     <script src="leaflet.ajax.min.js"></script>
     <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
@@ -13,9 +15,9 @@
   <body>
     <div id="map"></div>
     <script>
-      var nhoods = new L.GeoJSON.AJAX("data/neighborhoods_pdx.json");
+      L.mapbox.accessToken = 'pk.eyJ1IjoibWlnY29tIiwiYSI6ImNrUllYc3MifQ.isgDkadcGHvdQKkSC1ohfQ';
       var map = L.map('map');
-
+      var nhood = document.getElementById('nhood');
       L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
       	maxZoom: 18,
       	attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -23,8 +25,27 @@
       		'Imagery © <a href="http://mapbox.com">Mapbox</a>',
       	id: 'examples.map-i875mjb7'
       }).addTo(map);
-      nhoods.addTo(map);
-
+      $.ajax({
+          url: '/data/neighborhoods_pdx.json',
+          dataType: 'json',
+          success: function load(d) {
+              var nhoods = L.geoJson(d).addTo(map);
+              L.marker([38, -102], {
+                  icon: L.mapbox.marker.icon({
+                      'marker-color': '#f86767'
+                  }),
+                  draggable: true
+              }).addTo(map)
+              .on('dragend', function(e) {
+                  var layer = leafletPip.pointInLayer(this.getLatLng(), nhoods, true);
+                  if (layer.length) {
+                    nhood.innerHTML = '<strong>' + layer[0].feature.properties.name + '</strong>';
+                  } else {
+                    nhood.innerHTML = '';
+                  }
+              });
+          }
+      });
       function onLocationFound(e) {
       	var radius = e.accuracy / 2;
 
