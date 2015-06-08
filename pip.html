@@ -50,7 +50,7 @@ var map = L.mapbox.map('map', 'mapbox.emerald')
     .setView([38, -95], 4);
 
 $.ajax({
-    url: 'pdxneighborhoods/data/us-states.geojson',
+    url: 'data/us-states.geojson',
     dataType: 'json',
     success: function load(d) {
         var states = L.geoJson(d).addTo(map);
