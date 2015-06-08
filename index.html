@@ -28,7 +28,7 @@
       	id: 'examples.map-i875mjb7'
       }).addTo(map);
       $.ajax({
-          url: 'data/neighborhoods_pdx.json',
+          url: 'data/neighborhoods_pdx.geojson',
           dataType: 'json',
           success: function load(d) {
               var nhoods = L.geoJson(d).addTo(map);
